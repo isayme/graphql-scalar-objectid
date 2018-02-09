@@ -1,0 +1,28 @@
+{
+  "name": "graphql-scalar-objectid",
+  "version": "0.1.0",
+  "description": "GraphQLObjectId - GraphQL scalar for mongodb ObjectId",
+  "main": "lib/scalar-objectid.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isayme/graphql-scalar-objectid.git"
+  },
+  "keywords": [
+    "graphql",
+    "scalar",
+    "type",
+    "objectid",
+    "ObjectId",
+    "mongo",
+    "mongodb"
+  ],
+  "author": "iSayme <isaymeorg@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/isayme/graphql-scalar-objectid/issues"
+  },
+  "homepage": "https://github.com/isayme/graphql-scalar-objectid#readme"
+}
