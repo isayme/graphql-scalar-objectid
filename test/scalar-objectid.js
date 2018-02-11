@@ -1,5 +1,10 @@
 const assert = require('assert')
-const { graphql, isScalarType, GraphQLSchema, GraphQLObjectType } = require('graphql')
+const {
+  graphql,
+  isScalarType,
+  GraphQLSchema,
+  GraphQLObjectType
+} = require('graphql')
 const ObjectId = require('bson').ObjectId
 const GraphQLObjectId = require('../lib/scalar-objectid')
 
@@ -10,7 +15,7 @@ describe('GraphQLObjectId', () => {
 
   let id
 
-  it('serialize', (done) => {
+  it('serialize', done => {
     id = String(ObjectId())
     assert.equal(GraphQLObjectId.serialize(ObjectId(id)), id)
 
@@ -26,15 +31,18 @@ describe('GraphQLObjectId', () => {
         }
       })
     })
-    graphql(schema, '{ _id }').then(data => {
-      assert.deepEqual(data, { data: { _id: id } })
-      done()
-    }).catch(done)
+    graphql(schema, '{ _id }')
+      .then(data => {
+        assert.deepEqual(data, { data: { _id: id } })
+        done()
+      })
+      .catch(done)
   })
 
-  const errChecker = (err) => err.message === 'ObjectId must be a single String of 24 hex characters'
+  const errChecker = err =>
+    err.message === 'ObjectId must be a single String of 24 hex characters'
 
-  it('parseValue', (done) => {
+  it('parseValue', done => {
     assert.throws(() => GraphQLObjectId.parseValue('not ObjectId'), errChecker)
 
     id = String(ObjectId())
@@ -56,14 +64,19 @@ describe('GraphQLObjectId', () => {
         }
       })
     })
-    graphql(schema, `{ _id(_id: "${id}") }`).then(data => {
-      assert.deepEqual(data, { data: { _id: id } })
-      done()
-    }).catch(done)
+    graphql(schema, `{ _id(_id: "${id}") }`)
+      .then(data => {
+        assert.deepEqual(data, { data: { _id: id } })
+        done()
+      })
+      .catch(done)
   })
 
   it('parseLiteral', done => {
-    assert.throws(() => GraphQLObjectId.parseLiteral({ value: 'not ObjectId' }), errChecker)
+    assert.throws(
+      () => GraphQLObjectId.parseLiteral({ value: 'not ObjectId' }),
+      errChecker
+    )
 
     id = String(ObjectId())
     assert.ok(GraphQLObjectId.parseLiteral({ value: id }) instanceof ObjectId)
@@ -84,9 +97,21 @@ describe('GraphQLObjectId', () => {
         }
       })
     })
-    graphql(schema, `query Test($id: ObjectId) { _id(_id: $id) }`, undefined, undefined, { id: id }).then(data => {
-      assert.deepEqual(data, { data: { _id: id } })
-      done()
-    }).catch(done)
+    graphql(
+      schema,
+      `
+        query Test($id: ObjectId) {
+          _id(_id: $id)
+        }
+      `,
+      undefined,
+      undefined,
+      { id: id }
+    )
+      .then(data => {
+        assert.deepEqual(data, { data: { _id: id } })
+        done()
+      })
+      .catch(done)
   })
 })
