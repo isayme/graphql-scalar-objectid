@@ -48,5 +48,8 @@
   },
   "dependencies": {
     "bson": "^1.0.4"
+  },
+  "engines": {
+    "node": ">=6"
   }
 }
