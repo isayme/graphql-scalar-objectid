@@ -1,4 +1,4 @@
-const assert = require('assert')
+const assert = require('power-assert')
 const isObjectId = require('../lib/is-objectid')
 
 describe('isObjectId', () => {

@@ -8,8 +8,8 @@
     "pretest": "npm run lint",
     "lint": "standard",
     "prettier": "prettier-standard 'lib/**/*.js' 'test/**/*.js'",
-    "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "coverage": "istanbul cover _mocha --report lcovonly -- -R spec test/**/*.js && npm run coveralls"
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "coverage": "nyc npm run test && npm run coveralls"
   },
   "repository": {
     "type": "git",
@@ -31,12 +31,11 @@
   },
   "homepage": "https://github.com/isayme/graphql-scalar-objectid#readme",
   "devDependencies": {
-    "coveralls": "^3.0.1",
+    "coveralls": "^3.0.7",
     "graphql": "^0.13.0",
-    "istanbul": "^0.4.5",
-    "mocha": "^5.0.0",
-    "prettier-standard": "^8.0.0",
-    "standard": "^10.0.3"
+    "mocha": "^6.2.1",
+    "prettier-standard": "^15.0.1",
+    "standard": "^14.3.1"
   },
   "peerDependencies": {
     "graphql": "*"
@@ -47,7 +46,9 @@
     ]
   },
   "dependencies": {
-    "bson": "^1.1.0"
+    "bson": "^1.1.0",
+    "nyc": "^14.1.1",
+    "power-assert": "^1.6.1"
   },
   "engines": {
     "node": ">=6"
